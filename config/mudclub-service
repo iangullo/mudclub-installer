@@ -1,0 +1,17 @@
+[Unit]
+Description=MudClub
+Requires=network.target
+Requires=postgresql.service
+
+[Service]
+Type=simple
+User=mudclub
+Group=mudclub
+WorkingDirectory=/srv/rails/mudclub
+ExecStart=/bin/bash -lc 'rails server -e production'
+TimeoutSec=30
+RestartSec=15
+Restart=always
+
+[Install]
+WantedBy=multi-user.target
