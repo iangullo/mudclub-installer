@@ -14,6 +14,7 @@ then
 	cd $MUDHOME
 	print "    * Installing necesssary gems..."
 	bundle install --without 'development' 'test'
+#	gem install pleaserun
 	puts "OK"
 	print "    * Preparing database..."
 	sudo -u postgres createuser $MUDCLUB
@@ -37,8 +38,7 @@ then
 	rm /etc/nginx/sites-enabled/default
 	ln -s /etc/nginx/sites-available/mudclub /etc/nginx/sites-enabled/mudclub
 	nginx -t && systemctl reload nginx
-#	systemctl enable $MUDCLUB.service
-#	systemctl start $MUDCLUB.service
+#	pleaserun --name $MUDCLUB --user $MUDCLUB --overwrite --description "MudClub service definition" --chdir $MUDHOME /bin/bash -lc 'rails server -e production'
 	puts "================================"
 	echo >&2 "MudClub: Successfully built!"
 	exit 0

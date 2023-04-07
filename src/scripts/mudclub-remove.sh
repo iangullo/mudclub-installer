@@ -7,9 +7,9 @@ RAILS_ENV=production
 mkdir -p $SRVPATH
 echo "MudClub: Stopping application..."
 puts "================================"
-print "    * Removing $MUDCLUB service..."
-systemctl stop $MUDCLUB.service
-systemctl disable $MUDCLUB.service
+print "    * Removing $MUDCLUB fron Nginx..."
+#systemctl stop $MUDCLUB.service
+#systemctl disable $MUDCLUB.service
 rm /etc/nginx/sites-enabled/mudclub
 rm /etc/nginx/sites-available/mudclub
 nginx -t && systemctl reload nginx

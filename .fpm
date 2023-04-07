@@ -1,7 +1,8 @@
 -s dir
+--package build
 --name mudclub
---category webserver
---description "MudClub: Ruby on Rails service to manage a team sports club (seasons, teams players, coaches, etc.)"
+--category 'Rails App'
+--description "MudClub: Ruby on Rails application to manage a team sports club (seasons, teams players, coaches, etc.)"
 --license GPL3
 --maintainer "Iván González Angullo (iangullo@gmail.com)"
 --url "https://github.com/iangullo/mudclub/wiki"
@@ -9,17 +10,15 @@
 --architecture all
 --depends bash
 --depends git
---depends ruby
---depends ruby-rubygems
---depends postgresql
---depends nodejs
---depends nginx
---recommends mudclub-service
---after-install scripts/mudclub-build.sh
---after-upgrade scripts/mudclub-update.sh
---before-remove scripts/mudclub-remove.sh
-scripts/mudclub-start.sh=/usr/local/bin/mudclub-start
-scripts/mudclub-stop.sh=/usr/local/bin/mudclub-stop
-scripts/mudclub-update.sh=/usr/local/bin/mudclub-update
-config/nginx-mudclub=/etc/nginx/sites-available/mudclub
-# config/mudclub-service=/usr/lib/systemd/system/mudclub.service
+--depends 'ruby > 3.1.0'
+--depends 'ruby-rubygems > 3.3.0'
+--depends 'postgresql > 13.0'
+--depends 'nodejs > 12.0'
+--depends 'nginx > 1.18'
+--after-install src/scripts/mudclub-build.sh
+--after-upgrade src/scripts/mudclub-update.sh
+--before-remove src/scripts/mudclub-remove.sh
+src/scripts/mudclub-start.sh=/usr/local/bin/mudclub-start
+src/scripts/mudclub-stop.sh=/usr/local/bin/mudclub-stop
+src/scripts/mudclub-update.sh=/usr/local/bin/mudclub-update
+src/config/nginx-mudclub=/etc/nginx/sites-available/mudclub
