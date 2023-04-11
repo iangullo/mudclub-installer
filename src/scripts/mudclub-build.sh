@@ -14,12 +14,18 @@ then
 	cd $MUDHOME
 	print "    * Installing necesssary gems..."
 	bundle install --without 'development' 'test'
+	puts "OK"
 #	gem install pleaserun
-	puts "OK"
-	print "    * Preparing database..."
-	sudo -u postgres createuser $MUDCLUB
-	sudo -u postgres createdb $MUDCLUB.production --owner=mudclub
-	puts "OK"
+	if (( ! $(psql -t -c '\du' | cut -d \| -f 1 | grep -qw $MUDCLUB) )) ; then
+		print "    * Creating database user..."
+		sudo -u postgres createuser $MUDCLUB
+		puts "OK"
+	fi
+	if (( ! $(psql -lqt | cut -d \| -f 1 | grep -qw $MUDCLUB.production) )) ; then
+		print "    * Creating database..."
+		sudo -u postgres createdb $MUDCLUB.production --owner=mudclub
+		puts "OK"
+	fi
 	print "    * Migrating database..."
 	rails db:migrate
 	puts "OK"
