@@ -1,12 +1,12 @@
 -s dir
 --package build
---name mudclub
+--name mudclub-server
 --category 'Rails App'
---description "MudClub: Ruby on Rails application to manage a team sports club (seasons, teams players, coaches, etc.)"
+--description "MudClub: Ruby on Rails application to manage a team sports club (seasons, teams players, coaches, etc.). This package installs and configures a MudClub server using latest sources."
 --license GPL3
 --maintainer "Iván González Angullo (iangullo@gmail.com)"
 --url "https://github.com/iangullo/mudclub/wiki"
---version 0.6.1
+--version 0.1.0
 --architecture all
 --depends bash
 --depends git
