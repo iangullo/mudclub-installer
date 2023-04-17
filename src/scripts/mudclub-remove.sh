@@ -5,27 +5,29 @@ SRVPATH="/srv/rails"
 MUDHOME="/srv/rails/$MUDCLUB"
 RAILS_ENV=production
 mkdir -p $SRVPATH
-echo "MudClub: Stopping application..."
-puts "================================"
-print "    * Removing $MUDCLUB fron Nginx..."
+echo "MudClub: Removing application..."
+echo "================================"
+printf "  * Removing $MUDCLUB fron Nginx..."
 #systemctl stop $MUDCLUB.service
 #systemctl disable $MUDCLUB.service
-rm /etc/nginx/sites-enabled/mudclub
-rm /etc/nginx/sites-available/mudclub
-nginx -t && systemctl reload nginx
-puts "OK"
+rm /etc/nginx/sites-enabled/mudclub 2> /dev/null
+rm /etc/nginx/sites-available/mudclub 2> /dev/null
+nginx -t  2> /dev/null && systemctl reload nginx 2> /dev/null
+echo "OK"
 cd $MUDHOME
-print "    * Deleting database..."
-rails db:drop
-sudo -u postgres deleteuser $MUDCLUB
-puts "OK"
-print "    * Removing $MUDCLUB user..."
-deluser $MUDCLUB
-puts "OK"
-print "    * Deleting application..."
+printf "  * Deleting database..."
+su - $MUDCLUB -c "bin/rails db:drop"
+if (su - postgres  -c "psql -t -c '\du'" | cut -d \| -f 1 | grep -qw $MUDCLUB) ; then
+	su - postgres -c "dropuser $MUDCLUB"
+fi
+echo "OK"
+printf "  * Removing $MUDCLUB user..."
+deluser $MUDCLUB 2> /dev/null
+echo "OK"
+printf "  * Deleting application..."
 cd ..
-rm-rf $MUDHOME
-puts "OK"
-puts "================================"
+rm -rf $MUDHOME 2> /dev/null
+echo "OK"
+echo "================================"
 echo >&2 "MudClub: Successfully removed!"
 exit 0

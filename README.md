@@ -1,2 +1,2 @@
 # mudclub-installer
-FPM-bassed Intaller for MudClub
+FPM-based Intaller for MudClub
