@@ -52,6 +52,7 @@ if mkdir -p $MUDHOME 2> /dev/null ; then
 		if ! [[ $VAL ]] ; then
 			printf "  * Creating database..."
 			su - postgres -c "createdb $MUDCLUB --owner=$MUDCLUB"
+			su - mudclub -c "psql create extension unaccent"
 			echo "OK"
 		fi
 		# rails server preparation
