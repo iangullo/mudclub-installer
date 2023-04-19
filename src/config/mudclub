@@ -1,0 +1,14 @@
+# MudClub - Simple Rails app to manage a team sports club.
+# Copyright (C) 2023  Iván González Angullo
+#
+# Configuration file - you may modify the options here to your
+# system.
+
+# Assuming this to be a production server
+RAILS_ENV='production'
+
+# Posstgresql connection parameters
+DB_HOST='localhost'
+DB_USERNAME='mudclub'
+DB_PASSWORD='EtClausi'
+DB_NAME='mudclub'

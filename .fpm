@@ -16,7 +16,8 @@
 --depends 'libpq-dev > 12.0'
 --depends 'nodejs > 12.0'
 --depends 'nginx > 1.18'
---after-install src/scripts/mudclub-build.sh
+--config-files src/config/mudclub
+--after-install src/scripts/install.sh
 --after-upgrade src/scripts/mudclub-update.sh
 --before-remove src/scripts/mudclub-remove.sh
 src/scripts/mudclub-start.sh=/usr/local/bin/mudclub-start

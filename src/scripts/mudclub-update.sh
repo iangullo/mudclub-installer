@@ -1,26 +1,23 @@
 #!/bin/bash
 # Update script for MudClub - pulls from git and rebuilds application
-MUDCLUB=mudclub
-MUDHOME=/srv/rails/$MUDCLUB
+export MUDCLUB="mudclub"
+export MUDHOME="/srv/rails/$MUDCLUB"
 echo "MudClub: Trying to update..."
-puts "================================"
+echo "================================"
 cd $MUDHOME
-print "    * Pulling code..."
-if git pull
-	puts "OK"
-	print "    * Checking necesssary gems..."
-	bundle --without 'development' 'test'
-	puts "OK"
-	print "    * Migrating database..."
-	rails db:migrate -e production
-	puts "OK"
-	print "    * Compiling assets..."
-	rails assets:precompile
-	puts "OK"
-	print "    * Restarting service..."
+if su - $MUDCLUB -c "git pull" ; then
+	printf "* Checking necesssary gems...\n  "
+	su - $MUDCLUB -c "bundle"
+	printf "* Migrating database..."
+	su - $MUDCLUB -c "rails db:migrate -e production" 2> /dev/null
+	echo "OK"
+	printf "* Compiling assets..."
+	su - $MUDCLUB -c "rails assets:precompile" 2> /dev/null
+	echo "OK"
+	printf "* Restarting service..."
 	systemctl restart $MUDCLUB.service
-	puts "OK"
-	puts "================================"
+	echo "OK"
+	echo "================================"
 	echo >&2 "MudClub: Successfully updated!"
 	exit 0
 else

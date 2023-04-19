@@ -16,8 +16,9 @@ nginx -t  2> /dev/null && systemctl reload nginx 2> /dev/null
 echo "OK"
 cd $MUDHOME
 printf "  * Deleting database..."
-su - postgres -c "dropdb $MUDCLUB\_$RAILS_ENV"
-if (su - postgres  -c "psql -t -c '\du'" | cut -d \| -f 1 | grep -qw $MUDCLUB) ; then
+su - $MUDCLUB -c "rails db:drop"
+VAL=`su - postgres  -c "psql -t -c '\du'" | cut -d \| -f 1 | grep -w $MUDCLUB`
+if [ ! -z $VAL ] ; then
 	su - postgres -c "dropuser $MUDCLUB"
 fi
 echo "OK"
