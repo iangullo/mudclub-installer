@@ -4,11 +4,14 @@
 # Configuration file - you may modify the options here to your
 # system.
 
+# Server located in...
+MUDHOME="/srv/rails/mudclub"
+
 # Assuming this to be a production server
-RAILS_ENV='production'
+RAILS_ENV="production"
 
 # Posstgresql connection parameters
-DB_HOST='localhost'
-DB_USERNAME='mudclub'
+DB_HOST="localhost"
+DB_USERNAME="mudclub"
 DB_PASSWORD='EtClausi'
-DB_NAME='mudclub'
+DB_NAME="mudclub"

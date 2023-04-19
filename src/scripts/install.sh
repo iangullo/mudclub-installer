@@ -33,6 +33,7 @@ if mkdir -p $MUDHOME 2> /dev/null ; then
 		su - $MUDCLUB -c 'echo "fi" >> .bashrc'
 		echo "OK"
 		printf "* Installing necesssary gems...\n  "
+		gem install pleaserun 2> /dev/null
 		su - $MUDCLUB -c "$BUNDLE config set --local path 'vendor/bundle' 2> /dev/null" 2> /dev/null
 		su - $MUDCLUB -c "$BUNDLE config set --local without 'development test' 2> /dev/null" 2> /dev/null
 		su - $MUDCLUB -c "$BUNDLE install 2> /dev/null" 2> /dev/null
@@ -71,6 +72,9 @@ if mkdir -p $MUDHOME 2> /dev/null ; then
 		#	pleaserun --name $MUDCLUB --user $MUDCLUB --overwrite --description "MudClub service definition" --chdir $MUDHOME /bin/bash -lc 'rails server -e production'
 		echo "================================"
 		echo "MudClub: Successfully built!"
+		echo "================================"
+		echo "* Attempting to configure MudClub service..."
+		pleaserun --install --user $MUDCLUB --group $MUDCLUB --name $MUDCLUB --description "MudClub: open source team sports club management service" --chdir $MUDHOME --environment-file /etc/mudclub "/srv/rails/mudclub/bin/rails server"
 		exit 0
 	else
 		printf "ERROR!\n    => Could not clone from https://github.com/iangullo/mudclub.git\n"

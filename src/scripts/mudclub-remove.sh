@@ -8,15 +8,17 @@ mkdir -p $SRVPATH
 echo "MudClub: Removing application..."
 echo "================================"
 printf "  * Removing $MUDCLUB fron Nginx..."
-#systemctl stop $MUDCLUB.service
-#systemctl disable $MUDCLUB.service
+systemctl stop $MUDCLUB.service
+systemctl disable $MUDCLUB.service
+rm /etc/default/$MUDCLUB 2> /dev/null
+rm /etc/systemd/system/$MUDCLUB.service 2> /dev/null
 rm /etc/nginx/sites-enabled/mudclub 2> /dev/null
 rm /etc/nginx/sites-available/mudclub 2> /dev/null
 nginx -t  2> /dev/null && systemctl reload nginx 2> /dev/null
 echo "OK"
 cd $MUDHOME
 printf "  * Deleting database..."
-su - $MUDCLUB -c "rails db:drop"
+su - $MUDCLUB -c "rails db:drop -e production"
 VAL=`su - postgres  -c "psql -t -c '\du'" | cut -d \| -f 1 | grep -w $MUDCLUB`
 if [ ! -z $VAL ] ; then
 	su - postgres -c "dropuser $MUDCLUB"
