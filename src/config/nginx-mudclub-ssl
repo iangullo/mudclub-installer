@@ -5,7 +5,7 @@ upstream mudclub {
 server {
   listen 80;
   listen [::]:80;
-  server_name cbmairena.mooo.com;
+  server_name mudclub.org;
   return 302 https://$server_name$request_uri;
 }
 
@@ -15,7 +15,7 @@ server {
    root /srv/rails/mudclub/public;
    ssl_certificate /path/to/fullchain.pem;
    ssl_certificate_key /path/to/privkey.pem;
-   server_name cbmairena.mooo.com;
+   server_name mudclub.org;
    try_files $uri/index.html $uri @mudclub;
    location @mudclub {
        proxy_pass http://mudclub;
