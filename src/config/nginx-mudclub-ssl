@@ -1,0 +1,33 @@
+upstream mudclub {
+  server localhost:3000;
+}
+
+server {
+  listen 80;
+  listen [::]:80;
+  server_name cbmairena.mooo.com;
+  return 302 https://$server_name$request_uri;
+}
+
+server {
+   listen 443 ssl;
+   listen [::]:443 ssl;
+   root /srv/rails/mudclub/public;
+   ssl_certificate /path/to/fullchain.pem;
+   ssl_certificate_key /path/to/privkey.pem;
+   server_name cbmairena.mooo.com;
+   try_files $uri/index.html $uri @mudclub;
+   location @mudclub {
+       proxy_pass http://mudclub;
+       proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+       proxy_set_header Host $http_host;
+       proxy_set_header  X-Forwarded-Proto $scheme;
+       proxy_set_header  X-Forwarded-Ssl on;
+       proxy_set_header  X-Forwarded-Port $server_port;
+       proxy_set_header  X-Forwarded-Host $host;
+       proxy_redirect off;
+   }
+   error_page 500 502 503 504 /500.html;
+   client_max_body_size 4G;
+   keepalive_timeout 10;
+}

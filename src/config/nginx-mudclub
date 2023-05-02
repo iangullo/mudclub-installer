@@ -1,4 +1,4 @@
-upstream rails_server {
+upstream mudclub {
   server localhost:3000;
 }
 
@@ -11,7 +11,7 @@ server {
   }
 
   location @missing {
-    proxy_pass http://rails_server;
+    proxy_pass http://mudclub;
     proxy_set_header Host $http_host;
     proxy_redirect off;
   }
