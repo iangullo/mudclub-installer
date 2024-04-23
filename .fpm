@@ -6,7 +6,7 @@
 --license GPL3
 --maintainer "Iván González Angullo (iangullo@gmail.com)"
 --url "https://github.com/iangullo/mudclub/wiki"
---version 0.1.0
+--version 0.1.1
 --architecture all
 --depends bash
 --depends git
@@ -15,6 +15,7 @@
 --depends 'ruby-rubygems > 3.2.0'
 --depends 'postgresql > 13.0'
 --depends 'libpq-dev > 13.0'
+--depends 'libvips42' > 8.0'
 --depends 'nodejs > 16.0'
 --depends 'nginx > 1.18'
 --config-files src/config/mudclub

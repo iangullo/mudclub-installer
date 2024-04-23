@@ -74,7 +74,7 @@ if mkdir -p $MUDHOME 2> /dev/null ; then
 		echo "MudClub: Successfully built!"
 		echo "================================"
 		echo "* Attempting to configure MudClub service..."
-  		gem install pleaserun
+  	gem install pleaserun
 		pleaserun --install --user $MUDCLUB --group $MUDCLUB --name $MUDCLUB --description "MudClub: open source team sports club management service" --chdir $MUDHOME --environment-file /etc/mudclub "/srv/rails/mudclub/bin/rails server"
 		exit 0
 	else
