@@ -1,6 +1,7 @@
 [Unit]
-Description=MudClub
-Requires=network.target
+Description=MudClub server
+Wants=network-online.target
+After=network.target network-online.target
 Requires=postgresql.service
 
 [Service]
@@ -8,9 +9,11 @@ Type=simple
 User=mudclub
 Group=mudclub
 WorkingDirectory=/srv/rails/mudclub
-ExecStart=/bin/bash -lc 'rails server -e production'
-TimeoutSec=30
-RestartSec=15
+Environment="BASH_ENV=/srv/rails/mudclub/.bashrc"
+EnvironmentFile=/etc/mudclub
+ExecStart=
+ExecStart=/bin/bash -lc '/srv/rails/mudclub/bin/rails server -e production'
+TimeoutSec=15
 Restart=always
 
 [Install]
