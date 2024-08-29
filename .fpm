@@ -3,20 +3,21 @@
 --name mudclub-server
 --category 'Rails App'
 --description "MudClub: Ruby on Rails application to manage a team sports club (seasons, teams players, coaches, etc.). This package installs and configures a MudClub server using latest sources."
---license GPL3
+--license AGPL3
 --maintainer "Iván González Angullo (iangullo@gmail.com)"
 --url "https://github.com/iangullo/mudclub/wiki"
---version 0.1.1
+--version 1.11
 --architecture all
 --depends bash
 --depends git
---depends 'ruby > 3.1.0'
---depends 'ruby-dev > 3.1.0'
---depends 'ruby-rubygems > 3.2.0'
+--depends 'ruby > 3.3.0'
+--depends 'ruby-dev > 3.3.0'
+--depends 'ruby-rubygems > 3.5.0'
 --depends 'postgresql > 13.0'
 --depends 'libpq-dev > 13.0'
 --depends 'libvips42 > 8.0'
 --depends 'nodejs > 16.0'
+--depends 'npm > 9.0'
 --depends 'nginx > 1.18'
 --config-files src/config/mudclub
 --after-install src/scripts/install.sh

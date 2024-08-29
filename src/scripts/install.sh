@@ -39,8 +39,7 @@ if mkdir -p $MUDHOME 2> /dev/null ; then
 		su - $MUDCLUB -c "$BUNDLE install 2> /dev/null" 2> /dev/null
 		# rails server preparation
 		printf "* Creating secrets..."
-		RAILS_SEC=`su - $MUDCLUB -c "$RAILS secret"`
-		su - $MUDCLUB -c "printf \" %s\n\" $RAILS_SEC >> ~/config/secrets.yml"
+		RAILS_SEC=`su - $MUDCLUB -c "EDITOR='vi' $RAILS credentials:edit"`
 		echo "OK"
 		# ensure postgresql user exists
 		VAL=`su - postgres  -c "psql -t -c '\du'" | cut -d \| -f 1 | grep -w $MUDCLUB`
