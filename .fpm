@@ -19,6 +19,7 @@
 --depends 'nodejs > 16.0'
 --depends 'npm > 9.0'
 --depends 'nginx > 1.18'
+--depends 'libyaml-dev > 0.2'
 --config-files src/config/mudclub
 --after-install src/scripts/install.sh
 --after-upgrade src/scripts/mudclub-update.sh
