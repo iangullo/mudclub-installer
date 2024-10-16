@@ -6,12 +6,12 @@
 --license AGPL3
 --maintainer "Iván González Angullo (iangullo@gmail.com)"
 --url "https://github.com/iangullo/mudclub/wiki"
---version 1.11
+--version 1.11-beta
 --architecture all
 --depends bash
 --depends git
---depends 'ruby > 3.3.0'
---depends 'ruby-dev > 3.3.0'
+--depends 'ruby > 3.3.4'
+--depends 'ruby-dev > 3.3.4'
 --depends 'ruby-rubygems > 3.5.0'
 --depends 'postgresql > 13.0'
 --depends 'libpq-dev > 13.0'
